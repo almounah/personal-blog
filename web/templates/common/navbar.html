@@ -1,14 +1,20 @@
 {{define "nav"}}
 
-<nav class="sticky top-0 z-10 bg-grey backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200">
+<nav class="sticky top-0 z-10 bg-grey backdrop-filter backdrop-blur-lg bg-opacity-30 ">
     <div class="max-w-5xl mx-auto px-4">
         <div class="flex items-center justify-between h-16">
-            <span class="text-2xl text-gray-900 font-semibold">Haroun AL Mounayar</span>
+
+            <div class="flex items-center justify-between h-16">
+                <img src="/logo.svg"
+                    class="w-20 fill-gray-900 dark:fill-stone-200 transition-transform rotate-[-10deg] hover:rotate-[10deg]"
+                    fill="currentColor">
+                <p class="text-2xl text-gray-900 dark:text-stone-200 font-semibold">Haroun AL Mounayar </p>
+            </div>
             <div class="flex space-x-4 text-gray-900">
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Blog</a>
-                <a href="#">Contact</a>
+                <a class="text-gray-900 dark:text-stone-200" href="/home">Home</a>
+                <a class="text-gray-900 dark:text-stone-200" href="/about">About</a>
+                <a class="text-gray-900 dark:text-stone-200" href="/blog">Blog</a>
+                <a class="text-gray-900 dark:text-stone-200" href="/contact">Contact</a>
             </div>
         </div>
     </div>

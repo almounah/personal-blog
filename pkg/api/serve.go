@@ -15,17 +15,22 @@ type ServeConfig struct {
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("web/templates/index.html", "web/templates/common/navbar.html"))
-    w.Header().Set("Content-type", "text/html")
+	w.Header().Set("Content-type", "text/html")
 	tmpl.Execute(w, nil)
 }
 
 func faviconHandler(w http.ResponseWriter, r *http.Request) {
-    w.Header().Set("Content-Type", "image/x-icon")
+	w.Header().Set("Content-Type", "image/x-icon")
 	http.ServeFile(w, r, "web/static/icons/favicon.ico")
 }
 
+func logoHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "image/svg+xml")
+	http.ServeFile(w, r, "web/static/images/logo.svg")
+}
 func Serve(conf ServeConfig) {
-    http.HandleFunc("/favicon.ico", faviconHandler)
+	http.HandleFunc("/logo.svg", logoHandler)
+	http.HandleFunc("/favicon.ico", faviconHandler)
 	http.HandleFunc("/", rootHandler)
 	fmt.Println("Will now listen on " + conf.Ip + ":" + conf.Port)
 	err := http.ListenAndServe(conf.Ip+":"+conf.Port, nil)
