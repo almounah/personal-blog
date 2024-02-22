@@ -28,8 +28,15 @@ func logoHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "image/svg+xml")
 	http.ServeFile(w, r, "web/static/images/logo.svg")
 }
+
+func tailwindConfigHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/javascript")
+	http.ServeFile(w, r, "web/static/tailwind.config.js")
+}
+
 func Serve(conf ServeConfig) {
 	http.HandleFunc("/logo.svg", logoHandler)
+	http.HandleFunc("/tailwind.config.js", tailwindConfigHandler)
 	http.HandleFunc("/favicon.ico", faviconHandler)
 	http.HandleFunc("/", rootHandler)
 	fmt.Println("Will now listen on " + conf.Ip + ":" + conf.Port)
