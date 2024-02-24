@@ -20,33 +20,40 @@
 
                 <p class="text-2xl text-gray-900 dark:text-stone-200 font-semibold">Haroun</p>
             </div>
-            <div class="flex space-x-4 text-gray-900 max-md:hidden">
-                <a class="text-gray-900 dark:text-stone-200" href="/home">Home</a>
-                <a class="text-gray-900 dark:text-stone-200" href="/about">About</a>
-                <a class="text-gray-900 dark:text-stone-200" href="/blog">Blog</a>
-                <a class="text-gray-900 dark:text-stone-200" href="/contact">Contact</a>
+            <div class="flex text-gray-900 max-md:hidden">
+                <a id="home-menu-nav" class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400" href="/home">Home</a>
+                <a id="about-menu-nav" class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400" href="/about">About</a>
+                <a id="blog-menu-nav" class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400" href="/blog">Blog</a>
+                <a id="contact-menu-nav" class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400" href="/contact">Contact</a>
             </div>
 
             <div class="flex space-x-4">
-                <div class="md:hidden">
-                    <button
-                        class="relative group focus:pointer-events-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg ">
+                <button id=""
+                    class="md:hidden peer relative group focus:pointer-events-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg ">
+                    <div
+                        class="relative flex overflow-hidden items-center justify-center rounded-lg w-10 h-10 transform transition-all bg-slate-700 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 duration-200 shadow-md">
                         <div
-                            class="relative flex overflow-hidden items-center justify-center rounded-lg w-10 h-10 transform transition-all bg-slate-700 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 duration-200 shadow-md">
+                            class="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden group-focus:-translate-x-1.5 group-focus:rotate-180">
                             <div
-                                class="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden group-focus:-translate-x-1.5 group-focus:rotate-180">
-                                <div
-                                    class="bg-white h-[2px] w-7 transform transition-all duration-300 origin-left group-focus:rotate-[42deg] group-focus:w-2/3 delay-150">
-                                </div>
-                                <div
-                                    class="bg-white h-[2px] w-7 rounded transform transition-all duration-300 group-focus:translate-x-10">
-                                </div>
-                                <div
-                                    class="bg-white h-[2px] w-7 transform transition-all duration-300 origin-left group-focus:-rotate-[42deg] group-focus:w-2/3 delay-150">
-                                </div>
+                                class="bg-white h-[2px] w-7 transform transition-all duration-300 origin-left group-focus:rotate-[42deg] group-focus:w-2/3 delay-150">
+                            </div>
+                            <div
+                                class="bg-white h-[2px] w-7 rounded transform transition-all duration-300 group-focus:translate-x-10">
+                            </div>
+                            <div
+                                class="bg-white h-[2px] w-7 transform transition-all duration-300 origin-left group-focus:-rotate-[42deg] group-focus:w-2/3 delay-150">
                             </div>
                         </div>
-                    </button>
+                    </div>
+                </button>
+
+                <div id='menu'
+                    class="invisible peer-focus:visible transition transition-all ease-in duration-300 bg-neutral-50 dark:bg-gray-800 box-content w-52 border-2 top-16 right-0 absolute z-50 flex flex-col">
+                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200 " href="/home">Home</a>
+                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200" href="/about">About</a>
+                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200" href="/blog">Blog</a>
+                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200" href="/contact">Contact</a>
+
                 </div>
 
                 <button id="theme-toggle" type="button"
@@ -68,14 +75,6 @@
             </div>
 
         </div>
-    </div>
-    <div>
-        <li>
-            <ul><a class="text-gray-900 dark:text-stone-200" href="/home">Home</a></ul>
-            <ul><a class="text-gray-900 dark:text-stone-200" href="/about">About</a></ul>
-            <ul><a class="text-gray-900 dark:text-stone-200" href="/blog">Blog</a></ul>
-            <ul><a class="text-gray-900 dark:text-stone-200" href="/contact">Contact</a></ul>
-        </li>
     </div>
 </nav>
 
@@ -111,5 +110,13 @@
 
     });
 
+</script>
+<script>
+var pageName = window.location.pathname.split("/")[1]
+var elemToSelect = document.getElementById(pageName + "-menu-nav")
+elemToSelect.classList.add("text-gray-900")
+elemToSelect.classList.remove("dark:text-stone-200")
+elemToSelect.classList.add("dark:bg-teal-200")
+elemToSelect.classList.add("bg-teal-400")
 </script>
 {{end}}
