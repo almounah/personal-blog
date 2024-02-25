@@ -21,10 +21,18 @@
                 <p class="text-2xl text-gray-900 dark:text-stone-200 font-semibold">Haroun</p>
             </div>
             <div class="flex text-gray-900 max-md:hidden">
-                <a id="home-menu-nav" class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400" href="/home">Home</a>
-                <a id="about-menu-nav" class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400" href="/about">About</a>
-                <a id="blog-menu-nav" class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400" href="/blog">Blog</a>
-                <a id="contact-menu-nav" class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400" href="/contact">Contact</a>
+                <a id="home-menu-nav"
+                    class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400"
+                    href="/home">Home</a>
+                <a id="about-menu-nav"
+                    class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400"
+                    href="/about">About</a>
+                <a id="blog-menu-nav"
+                    class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400"
+                    href="/blog">Blog</a>
+                <a id="contact-menu-nav"
+                    class="p-4 text-gray-900 dark:text-stone-200 hover:dark:text-gray-900 focus:dark:text-gray-900 hover:dark:bg-teal-200 hover:bg-teal-400 focus:dark:bg-teal-200 focus:bg-teal-400"
+                    href="/contact">Contact</a>
             </div>
 
             <div class="flex space-x-4">
@@ -49,10 +57,14 @@
 
                 <div id='menu'
                     class="invisible peer-focus:visible transition transition-all ease-in duration-300 bg-neutral-50 dark:bg-gray-800 box-content w-52 border-2 top-16 right-0 absolute z-50 flex flex-col">
-                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200 " href="/home">Home</a>
-                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200" href="/about">About</a>
-                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200" href="/blog">Blog</a>
-                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200" href="/contact">Contact</a>
+                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200 "
+                        href="/home">Home</a>
+                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200"
+                        href="/about">About</a>
+                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200"
+                        href="/blog">Blog</a>
+                    <a class="p-4 hover:bg-neutral-200 hover:dark:bg-gray-600 text-gray-900 dark:text-stone-200"
+                        href="/contact">Contact</a>
 
                 </div>
 
@@ -112,11 +124,14 @@
 
 </script>
 <script>
-var pageName = window.location.pathname.split("/")[1]
-var elemToSelect = document.getElementById(pageName + "-menu-nav")
-elemToSelect.classList.add("text-gray-900")
-elemToSelect.classList.remove("dark:text-stone-200")
-elemToSelect.classList.add("dark:bg-teal-200")
-elemToSelect.classList.add("bg-teal-400")
+    var pageName = window.location.pathname.split("/")[1]
+    if (pageName === "") {
+        pageName = "home"
+    }
+    var elemToSelect = document.getElementById(pageName + "-menu-nav")
+    elemToSelect.classList.add("text-gray-900")
+    elemToSelect.classList.remove("dark:text-stone-200")
+    elemToSelect.classList.add("dark:bg-teal-200")
+    elemToSelect.classList.add("bg-teal-400")
 </script>
 {{end}}

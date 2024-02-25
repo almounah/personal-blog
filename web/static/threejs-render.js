@@ -9,9 +9,11 @@ scene.position.y = -13
 scene.add(new THREE.AxesHelper(0))
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
-camera.position.x = 14;
-camera.position.y = 33;
-camera.position.z = 9;
+const initialCameraPosition = new THREE.Vector3(
+    -20, 15, 27)
+camera.position.x = initialCameraPosition.x
+camera.position.y = initialCameraPosition.y
+camera.position.z = initialCameraPosition.z
 
 const renderer = new THREE.WebGLRenderer({ canvas: canvasOfDesk, alpha: true });
 renderer.shadowMap.enabled = true
@@ -54,17 +56,35 @@ loader.load(
 
 window.addEventListener('resize', onWindowResize, false)
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight
     camera.updateProjectionMatrix()
-    renderer.setSize(window.innerWidth, window.innerHeight)
     render()
 }
 
-
+let frame = 0
+const target = new THREE.Vector3(-0.5, 1.2, 0)
+function easeOutCirc(x) {
+    return Math.sqrt(1 - Math.pow(x - 1, 4))
+}
 function animate() {
+
     requestAnimationFrame(animate)
 
-    controls.update()
+    frame = frame <= 100 ? frame + 1 : frame
+
+    if (frame <= 100) {
+        const p = initialCameraPosition
+        const rotSpeed = -easeOutCirc(frame / 120) * Math.PI * 20
+        console.log(rotSpeed)
+
+        camera.position.y = p.y
+        camera.position.x =
+            p.x * Math.cos(rotSpeed) + p.z * Math.sin(rotSpeed)
+        camera.position.z =
+            p.z * Math.cos(rotSpeed) - p.x * Math.sin(rotSpeed)
+        camera.lookAt(target)
+    } else {
+        controls.update()
+    }
 
     render()
 
