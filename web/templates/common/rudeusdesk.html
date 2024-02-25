@@ -1,0 +1,18 @@
+{{define "desk"}}
+<div class="flex justify-center">
+    <canvas class="bg-transparent w-1/2" id="rudeus-desk">
+        PUT DESK HERE
+    </canvas>
+</div>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+      "three/addons/loaders/GLTFLoader.js": "https://unpkg.com/three@0.161.0/examples/jsm/loaders/GLTFLoader.js",
+      "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.161.0/examples/jsm/controls/OrbitControls.js",
+      "three/addons/libs/stats.module": "https://unpkg.com/three@0.161.0/examples/jsm/libs/stats.module"
+    }
+  }
+</script>
+<script type="module" src="/threejs-render.js"></script>
+{{end}}

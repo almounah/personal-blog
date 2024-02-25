@@ -14,7 +14,7 @@ type ServeConfig struct {
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("web/templates/index.html", "web/templates/common/navbar.html"))
+	tmpl := template.Must(template.ParseFiles("web/templates/index.html", "web/templates/common/navbar.html", "web/templates/common/rudeusdesk.html"))
 	w.Header().Set("Content-type", "text/html")
 	tmpl.Execute(w, nil)
 }
@@ -34,8 +34,19 @@ func tailwindConfigHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "web/static/tailwind.config.js")
 }
 
+func threejsHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/javascript")
+	http.ServeFile(w, r, "web/static/threejs-render.js")
+}
+func glbHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "model/gltf-binary")
+	http.ServeFile(w, r, "web/static/desk.glb")
+}
+
 func Serve(conf ServeConfig) {
 	http.HandleFunc("/logo.svg", logoHandler)
+	http.HandleFunc("/desk.glb", glbHandler)
+	http.HandleFunc("/threejs-render.js", threejsHandler)
 	http.HandleFunc("/tailwind.config.js", tailwindConfigHandler)
 	http.HandleFunc("/favicon.ico", faviconHandler)
 	http.HandleFunc("/", rootHandler)
