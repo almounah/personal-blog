@@ -10,7 +10,7 @@ scene.add(new THREE.AxesHelper(0))
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
 const initialCameraPosition = new THREE.Vector3(
-    -20, 15, 27)
+    -23, 17, 36)
 camera.position.x = initialCameraPosition.x
 camera.position.y = initialCameraPosition.y
 camera.position.z = initialCameraPosition.z
@@ -69,22 +69,17 @@ function animate() {
 
     requestAnimationFrame(animate)
 
-    frame = frame <= 100 ? frame + 1 : frame
+    frame = 100
 
-    if (frame <= 100) {
-        const p = initialCameraPosition
-        const rotSpeed = -easeOutCirc(frame / 120) * Math.PI * 20
-        console.log(rotSpeed)
+    const p = camera.position
+    const rotSpeed = -easeOutCirc(frame / 120) * Math.PI * 20
 
-        camera.position.y = p.y
-        camera.position.x =
-            p.x * Math.cos(rotSpeed) + p.z * Math.sin(rotSpeed)
-        camera.position.z =
-            p.z * Math.cos(rotSpeed) - p.x * Math.sin(rotSpeed)
-        camera.lookAt(target)
-    } else {
-        controls.update()
-    }
+    camera.position.y = p.y
+    camera.position.x =
+        p.x * Math.cos(rotSpeed) + p.z * Math.sin(rotSpeed)
+    camera.position.z =
+        p.z * Math.cos(rotSpeed) - p.x * Math.sin(rotSpeed)
+    camera.lookAt(target)
 
     render()
 
