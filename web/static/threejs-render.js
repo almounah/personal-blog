@@ -5,22 +5,40 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 var canvasOfDesk = document.getElementById("rudeus-desk")
 
 const scene = new THREE.Scene();
-scene.position.y = -13
 scene.add(new THREE.AxesHelper(0))
+scene.position.y = -12
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
+//const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
+const scW = canvasOfDesk.width
+const scH = canvasOfDesk.height
+console.log(scW, scH)
+const scale = (scH * 0.005 + 4.8) * 5
+const camera = new THREE.OrthographicCamera(
+    -2*scale,
+    2*scale,
+    scale,
+    -scale,
+    0.01,
+    50000
+)
 const initialCameraPosition = new THREE.Vector3(
-    -23, 17, 36)
-camera.position.x = initialCameraPosition.x
-camera.position.y = initialCameraPosition.y
-camera.position.z = initialCameraPosition.z
+    20 * Math.sin(0.2 * Math.PI),
+    20,
+    20 * Math.cos(0.2 * Math.PI)
+)
+const target = new THREE.Vector3(-0.5, 1.2, 0)
+
+camera.position.copy(initialCameraPosition)
+camera.lookAt(target)
+//const initialCameraPosition = new THREE.Vector3(-5, 8, 18)
 
 const renderer = new THREE.WebGLRenderer({ canvas: canvasOfDesk, alpha: true });
 renderer.shadowMap.enabled = true
-renderer.setPixelRatio(10 * window.devicePixelRatio)
+renderer.setPixelRatio(3 * window.devicePixelRatio)
 
 const controls = new OrbitControls(camera, renderer.domElement)
-controls.enableDamping = true
+controls.autoRotate = true
+controls.target = target
 
 const loader = new GLTFLoader();
 
@@ -31,6 +49,9 @@ scene.add(lightCandle)
 const lightLaptop = new THREE.SpotLight(0xffffff, 2000)
 lightLaptop.position.set(-10, 40, -15)
 scene.add(lightLaptop)
+
+const ambientLight = new THREE.AmbientLight(0xcccccc, Math.PI)
+scene.add(ambientLight)
 
 loader.load(
     '/desk.glb',
@@ -44,6 +65,8 @@ loader.load(
                 child.castShadow = true
                 child.receiveShadow = true
             }
+            child.frustumCulled = false;
+
         })
     },
     (xhr) => {
@@ -60,26 +83,28 @@ function onWindowResize() {
     render()
 }
 
-let frame = 0
-const target = new THREE.Vector3(-0.5, 1.2, 0)
+var frame = 1
 function easeOutCirc(x) {
     return Math.sqrt(1 - Math.pow(x - 1, 4))
 }
 function animate() {
 
+    frame = frame <= 100 ? frame + 1 : frame
     requestAnimationFrame(animate)
 
-    frame = 100
+    if (frame <= 100) {
+        var rotSpeed = -easeOutCirc(frame / 120) * Math.PI * 20
+        const p = initialCameraPosition
+        camera.position.y = p.y
+        camera.position.x =
+            p.x * Math.cos(rotSpeed) + p.z * Math.sin(rotSpeed)
+        camera.position.z =
+            p.z * Math.cos(rotSpeed) - p.x * Math.sin(rotSpeed)
+        camera.lookAt(target)
+    } else {
+        controls.update()
+    }
 
-    const p = camera.position
-    const rotSpeed = -easeOutCirc(frame / 120) * Math.PI * 20
-
-    camera.position.y = p.y
-    camera.position.x =
-        p.x * Math.cos(rotSpeed) + p.z * Math.sin(rotSpeed)
-    camera.position.z =
-        p.z * Math.cos(rotSpeed) - p.x * Math.sin(rotSpeed)
-    camera.lookAt(target)
 
     render()
 
