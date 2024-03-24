@@ -14,7 +14,11 @@ type ServeConfig struct {
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("web/templates/index.html", "web/templates/common/navbar.html", "web/templates/common/rudeusdesk.html"))
+	tmpl := template.Must(template.ParseFiles("web/templates/index.html",
+                                              "web/templates/common/navbar.html",
+                                              "web/templates/common/rudeusdesk.html",
+                                              "web/templates/common/mtscene.html",
+                                              "web/templates/home/quickpres.html"))
 	w.Header().Set("Content-type", "text/html")
 	tmpl.Execute(w, nil)
 }
@@ -27,6 +31,11 @@ func faviconHandler(w http.ResponseWriter, r *http.Request) {
 func logoHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "image/svg+xml")
 	http.ServeFile(w, r, "web/static/images/logo.svg")
+}
+
+func mePicHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "image/png")
+	http.ServeFile(w, r, "web/static/images/me.png")
 }
 
 func tailwindConfigHandler(w http.ResponseWriter, r *http.Request) {
@@ -44,6 +53,7 @@ func glbHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Serve(conf ServeConfig) {
+    http.HandleFunc("/me.png", mePicHandler)
 	http.HandleFunc("/logo.svg", logoHandler)
 	http.HandleFunc("/desk.glb", glbHandler)
 	http.HandleFunc("/threejs-render.js", threejsHandler)

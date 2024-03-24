@@ -12,10 +12,10 @@ scene.position.y = -12
 const scW = canvasOfDesk.width
 const scH = canvasOfDesk.height
 console.log(scW, scH)
-const scale = (scH * 0.005 + 4.8) * 5
+const scale = (scH * 0.005 + 4.8) * 5.5
 const camera = new THREE.OrthographicCamera(
-    -2*scale,
-    2*scale,
+    -1.5*scale,
+    1.5*scale,
     scale,
     -scale,
     0.01,
