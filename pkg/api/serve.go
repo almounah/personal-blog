@@ -15,10 +15,12 @@ type ServeConfig struct {
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("web/templates/index.html",
-                                              "web/templates/common/navbar.html",
-                                              "web/templates/common/rudeusdesk.html",
-                                              "web/templates/common/mtscene.html",
-                                              "web/templates/home/quickpres.html"))
+		"web/templates/common/navbar.html",
+		"web/templates/common/rudeusdesk.html",
+		"web/templates/common/mtscene.html",
+		"web/templates/home/bio.html",
+		"web/templates/home/work.html",
+		"web/templates/home/quickpres.html"))
 	w.Header().Set("Content-type", "text/html")
 	tmpl.Execute(w, nil)
 }
@@ -53,7 +55,7 @@ func glbHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Serve(conf ServeConfig) {
-    http.HandleFunc("/me.png", mePicHandler)
+	http.HandleFunc("/me.png", mePicHandler)
 	http.HandleFunc("/logo.svg", logoHandler)
 	http.HandleFunc("/desk.glb", glbHandler)
 	http.HandleFunc("/threejs-render.js", threejsHandler)
