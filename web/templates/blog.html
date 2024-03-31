@@ -1,0 +1,27 @@
+<!DOCTYPE>
+<html class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Haroun AL Mounayar</title>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/tailwind.config.js"></script>
+</head>
+
+<body class=" bg-orange-100 dark:bg-neutral-800">
+    <main class="grid grid-cols-12 justify-center col-auto">
+        <div class="col-span-full row-start-1">
+            {{template "nav"}}
+        </div>
+        <div class="flex flex-col row-start-1 mt-[55] col-span-full w-full">
+            {{template "mtscene"}}
+        </div>
+    </main>
+
+</body>
+    {{template "footer"}}
+
+</html>
